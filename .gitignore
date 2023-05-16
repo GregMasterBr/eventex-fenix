@@ -6,3 +6,4 @@
 .ipynb_checkpoints/
 staticfiles/
 __pycache__
+*.sqlite3
