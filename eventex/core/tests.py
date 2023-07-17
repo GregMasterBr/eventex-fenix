@@ -12,3 +12,9 @@ class HomeTest(TestCase): # Cenário de teste (O TestCase herda do Unit Test)
     def test_template(self):
         """Must use index.html"""
         self.assertTemplateUsed(self.response, 'index.html')        
+   
+    def test_has_form(self):
+        pass
+    
+    def test_form_has_erros(self):
+        pass        

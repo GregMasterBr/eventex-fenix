@@ -16,8 +16,12 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
+import eventex.subscriptions.views
+
 
 urlpatterns = [
     path("admin/", admin.site.urls),
-    path("", include('eventex.core.urls'))
+    path("", include('eventex.core.urls')),
+    path('inscricao/',eventex.subscriptions.views.subscribe),
+
 ]
