@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from django.http import HttpResponse, HttpResponseRedirect
+from django.http import HttpResponseRedirect
 from eventex.subscriptions.forms import SubscriptionForm
 from django.core import mail
 from django.template.loader import render_to_string
