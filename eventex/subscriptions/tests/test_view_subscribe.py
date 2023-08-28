@@ -1,4 +1,5 @@
 from django.test import TestCase
+from eventex.subscriptions.models import Subscription
 from eventex.subscriptions.forms import SubscriptionForm
 from django.shortcuts import redirect, resolve_url as r
 from django.core import mail
@@ -67,6 +68,10 @@ class SubscribePostValid(TestCase):
         ''' Valida se existe o e-mail   '''
         self.assertEqual(1, len(mail.outbox))
 
+    def test_save_subscription(self):
+        '''Salva a instância no banco de dados'''
+        self.assertTrue(Subscription.objects.exists())
+
 
 class SubscribePostInvalid(TestCase):
     def setUp(self):
@@ -90,6 +95,10 @@ class SubscribePostInvalid(TestCase):
         '''Form must contain errors'''
         form = self.resp.context['form']
         self.assertTrue(form.errors)
+
+    def test_dont_save_subscription(self):
+        '''verifica se a instância não existe no banco de dados'''
+        self.assertFalse(Subscription.objects.exists())
 
 
 class SubscribeSucessMessage(TestCase):
