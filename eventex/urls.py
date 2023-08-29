@@ -23,5 +23,5 @@ urlpatterns = [
     path("admin/", admin.site.urls),
     path("", include('eventex.core.urls')),
     path('inscricao/',views.subscribe),
-    path('inscricao/1/',views.detail),
+    path('inscricao/<int:pk>/',views.detail),
 ]
