@@ -1,4 +1,5 @@
 from django.test import TestCase
+import unittest
 from eventex.subscriptions.models import Subscription
 from eventex.subscriptions.forms import SubscriptionForm
 from django.shortcuts import redirect, resolve_url as r
@@ -63,6 +64,7 @@ class SubscribePostValid(TestCase):
             Valid POST should redirect to /inscricao/
         '''
         self.assertEqual(302, self.resp.status_code)
+        self.assertRedirects(self.resp, '/inscricao/1/')
 
     def test_send_subscribe_email(self):
         ''' Valida se existe o e-mail   '''
@@ -100,7 +102,7 @@ class SubscribePostInvalid(TestCase):
         '''verifica se a instância não existe no banco de dados'''
         self.assertFalse(Subscription.objects.exists())
 
-
+@unittest.skip('to be removed.')
 class SubscribeSucessMessage(TestCase):
     def test_message(self):
         data = dict(name='Gregorio Queiroz', cpf='12345678901',
