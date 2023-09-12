@@ -7,10 +7,10 @@ from django.core import mail
 
 class SubscribePostValid(TestCase):
     def setUp(self):
-        self.response = self.client.get('/inscricao/')
+        self.response = self.client.get(r('subscriptions:new'))
         data = dict(name='Gregorio Queiroz', cpf='12345678901',
                     email='gregmasterbr@gmail.com', phone='15-98105-7742')
-        self.client.post('/inscricao/', data)
+        self.client.post(r('subscriptions:new'), data)
         self.email = mail.outbox[0]
 
 
