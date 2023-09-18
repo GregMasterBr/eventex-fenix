@@ -17,6 +17,4 @@ class Subscription(models.Model):
     def __str__(self):
         return self.name
 
-    def test_paid_default_to_False(self):
-        """"By default paid must be False"""
-        self.assertEqual(False,self.obj.paid)
+
