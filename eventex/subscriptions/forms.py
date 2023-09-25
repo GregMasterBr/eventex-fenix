@@ -15,10 +15,10 @@ class SubscriptionForm(forms.Form):
     email = forms.EmailField(label='E-mail')
     phone = forms.CharField(label='Telefone')
 
-    # def clean_name(self):
-    #     name = self.cleaned_data['name']
-    #     words = [w.capitalize() for w in name.split()]
-    #     return ' '.join(words)
+    def clean_name(self):
+        name = self.cleaned_data['name']
+        words = [w.capitalize() for w in name.split()]
+        return ' '.join(words)
 
     # def clean(self):
     #     if not self.cleaned_data.get('email') and not self.cleaned_data.get('phone'):
