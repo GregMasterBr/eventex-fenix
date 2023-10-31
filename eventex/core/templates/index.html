@@ -54,6 +54,23 @@
             </div>
         </section>
 
+        <!-- SPEAKERS -->
+        <section id="speakers">
+        	<div class="speakers text-align-center row desktop-8 padding-bottom-2 container">
+            	<i class="fa-solid fa-speakers"></i>
+            	<h2>Palestrantes Convidados</h2>
+            
+                {% for speaker in speaker_list %}
+                <div class="desktop-4">
+                    <img src="{{ speaker.photo }}" alt="" title="" />
+                    <h3>{{ speaker.name }}</h3>
+                </div>             
+                {% endfor %}
+    
+            </div>
+        </section>
+
+
         <!-- SPONSORS -->
         <section id="sponsors">
         	<div class="sponsors text-align-center row desktop-12 min-h-28 padding-bottom-2 container">
