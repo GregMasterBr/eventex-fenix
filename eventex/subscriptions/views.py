@@ -25,7 +25,8 @@ def create(request):
    if not form.is_valid():
       return render(request,'subscriptions/subscription_form.html', {'form':form})
 
-   subscription = Subscription.objects.create(**form.cleaned_data)
+   #subscription = Subscription.objects.create(**form.cleaned_data)
+   subscription = form.save() # quando o formulário for muito alinhado com a model.
 
    #envia email
    _send_mail('Confirmação de inscrição', settings.DEFAULT_FROM_EMAIL, subscription.email, 'subscriptions/subscription_email.txt', {'subscription':subscription})
