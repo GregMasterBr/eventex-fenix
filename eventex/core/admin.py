@@ -1,10 +1,15 @@
 from django.contrib import admin
 from django.utils.html import format_html
-from eventex.core.models import Speaker
+from eventex.core.models import Speaker, Contact
 
+class ContactInLine(admin.TabularInline):
+    model = Contact
+    extra = 1
+    #max_num = 1
 
 # Register your models here.
 class SpeakerModelAdmin(admin.ModelAdmin):
+    inlines = [ContactInLine]
     prepopulated_fields = {'slug': ('name',)}
     list_display = ['photo_img', 'name', 'website_link']
     search_fields = ('name',)
@@ -19,5 +24,8 @@ class SpeakerModelAdmin(admin.ModelAdmin):
     
     photo_img.allow_tags = True
     photo_img.short_description = 'foto'    
+
+
+
 
 admin.site.register(Speaker, SpeakerModelAdmin)
