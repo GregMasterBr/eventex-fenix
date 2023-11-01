@@ -63,7 +63,7 @@
                 {% for speaker in speaker_list %}
                 <div class="desktop-4">
                     <img src="{{ speaker.photo }}" alt="" title="" />
-                    <h3>{{ speaker.name }}</h3>
+                    <h3><a href="{{speaker.get_absolute_url }}" >{{speaker.name}}</a></h3>
                 </div>             
                 {% endfor %}
     

@@ -1,0 +1,29 @@
+[
+{
+    "model": "core.speaker",
+    "pk": 1,
+    "fields": {
+        "name": "Grace Hopper",
+        "slug": "grace-hopper",
+        "title" : "Programadora e almirante",
+        "photo": "https://www.timeforkids.com/wp-content/uploads/2020/08/Grace_003.jpg",
+        "website": "https://hbn.link/hopper-site",
+        "description": "Programadora e almirante.\nInventora do compilador, criadora da linguagem de programação Flow-Matic serviu de base para a linguagem COBOL permitindo a popularização de aplicações comerciais.\nQuer mais o que?",
+        "created_at" : "2023-11-01T00:02:45.128Z"
+
+    }
+},
+{
+    "model": "core.speaker",
+    "pk": 2,
+    "fields": {
+        "name": "Alan Turing",
+        "slug": "alan-turing",
+        "title" : "Físico",
+        "photo": "https://cdn.britannica.com/81/191581-050-8C0A8CD3/Alan-Turing.jpg",
+        "website": "https://hbn.link/turing-site",
+        "description": "Matemático e decifrador de códigos.\nInventou o computador moderno, formalizou matematicamente o que é um algorítimo e de quebra salvou o mundo como conhecemos ao destro\u00e7ar a criptografia nazista.",
+        "created_at" : "2023-11-01T00:04:07.680Z"
+    }
+}
+]
