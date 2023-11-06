@@ -384,3 +384,16 @@ This will clear the statics beforehand.
     float:left ;
     padding-right: 15px;
 }
+
+/*Talks*/
+.talks h3{
+    min-height: 1em;
+    padding: 0;
+}
+
+.talks h4{
+    min-height: 1em;
+    font-size: 1em;
+    padding: 0;
+    margin: 0;
+}

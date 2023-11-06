@@ -42,3 +42,21 @@ class Contact(models.Model):
     
     def __str__(self):
         return self.value      
+    
+
+
+class Talk(models.Model):
+    title = models.CharField('título', max_length=100)
+    start = models.TimeField('início', blank=True, null=True)
+    description = models.TextField('descrição', blank=True)
+    speakers = models.ManyToManyField("Speaker", verbose_name='palestrantes', blank=True)
+    
+    class Meta:
+        #abstract é a chave para mostrar para o django que isso se trata de uma classe abstrata. Esse abstract faz com que não tenha uma tabela associada no BD.
+        #abstract = True 
+        ordering = ['start']
+        verbose_name_plural = 'palestras'
+        verbose_name = 'palestra'
+    
+    def __str__(self):
+        return self.title      
