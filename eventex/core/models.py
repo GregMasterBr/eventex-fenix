@@ -1,6 +1,7 @@
 from django.db import models
 from eventex.subscriptions.validators import validate_cpf
 from django.shortcuts import resolve_url as r
+from eventex.core.managers import EmailContactManager, PhoneContactManager
 
 # Create your models here.
 class Speaker(models.Model):
@@ -36,6 +37,10 @@ class Contact(models.Model):
     kind = models.CharField('tipo', max_length=1, choices=KINDS)
     value = models.CharField('valor', max_length=255)
 
+    objects = models.Manager()
+    emails = EmailContactManager()
+    phones = PhoneContactManager()
+    
     class Meta:
         verbose_name_plural = 'contatos'
         verbose_name = 'contato'
