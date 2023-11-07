@@ -27,12 +27,12 @@ class SpeakerModelAdmin(admin.ModelAdmin):
 
 
     def email(self, obj):
-        return Contact.emails.filter(speaker=obj).first()        
-
+        return obj.contact_set(manager='emails').first()    
+   
     email.short_description = 'e-mail'
 
     def phone(self, obj):
-        return Contact.phones.filter(speaker=obj).first()
+        return obj.contact_set(manager='phones').first()    
 
 
     phone.short_description = 'telefone'
