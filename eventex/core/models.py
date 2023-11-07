@@ -2,6 +2,8 @@ from django.db import models
 from eventex.subscriptions.validators import validate_cpf
 from django.shortcuts import resolve_url as r
 from eventex.core.managers import KindQuerySet
+from eventex.core.managers import PeriodManager
+
 
 # Create your models here.
 class Speaker(models.Model):
@@ -54,6 +56,7 @@ class Talk(models.Model):
     description = models.TextField('descrição', blank=True)
     speakers = models.ManyToManyField("Speaker", verbose_name='palestrantes', blank=True)
     
+    objects = PeriodManager()
     class Meta:
         #abstract é a chave para mostrar para o django que isso se trata de uma classe abstrata. Esse abstract faz com que não tenha uma tabela associada no BD.
         #abstract = True 
