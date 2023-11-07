@@ -52,11 +52,11 @@ class ContactManagerTest(TestCase):
 
 
     def test_emails(self):
-        queryset = Contact.emails.all()
+        queryset = Contact.objects.emails()
         expected = ['henrique@bastos.net']
         self.assertQuerysetEqual(queryset, expected, lambda obj: obj.value)
 
     def test_phones(self):
-        queryset = Contact.phones.all()
+        queryset = Contact.objects.phones()
         expected = ['21-996186180']
         self.assertQuerysetEqual(queryset, expected, lambda obj: obj.value)  
