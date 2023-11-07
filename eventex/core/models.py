@@ -1,7 +1,7 @@
 from django.db import models
 from eventex.subscriptions.validators import validate_cpf
 from django.shortcuts import resolve_url as r
-from eventex.core.managers import KindContactManager
+from eventex.core.managers import KindQuerySet
 
 # Create your models here.
 class Speaker(models.Model):
@@ -37,7 +37,7 @@ class Contact(models.Model):
     kind = models.CharField('tipo', max_length=1, choices=KINDS)
     value = models.CharField('valor', max_length=255)
 
-    objects = KindContactManager()
+    objects = KindQuerySet.as_manager()
 
     class Meta:
         verbose_name_plural = 'contatos'
