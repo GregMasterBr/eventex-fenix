@@ -8,6 +8,7 @@ class TalkListGet(TestCase):
     def setUp(self):
         t1 = Talk.objects.create(title='Título da Palestra', start='10:00', description='Descrição da palestra.')       
         t2 = Talk.objects.create(title='Título da Palestra', start='13:00', description='Descrição da palestra.')  
+        c1 = Course.objects.create(title='Título do Curso', start='09:00', description='Descrição do curso.', slots=20)  
 
 
         speaker = Speaker.objects.create( 
@@ -17,6 +18,7 @@ class TalkListGet(TestCase):
         )
         t1.speakers.add(speaker)
         t2.speakers.add(speaker)
+        c1.speakers.add(speaker)
 
         self.resp = self.client.get(r('talk_list'))       
 
