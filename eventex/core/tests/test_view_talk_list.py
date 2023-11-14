@@ -59,7 +59,9 @@ class TalkListGetEmpty(TestCase):
 
         self.assertContains(response, 'Ainda não existem palestras de manhã.')
         self.assertContains(response, 'Ainda não existem palestras de tarde.')
+        self.assertContains(response, 'Ainda não existem cursos.')
 
+        
 class CourseModelTest(TestCase):
     def setUp(self) -> None:
         self.course = Course.objects.create(
