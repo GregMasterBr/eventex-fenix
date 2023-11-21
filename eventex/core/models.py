@@ -49,8 +49,7 @@ class Contact(models.Model):
         return self.value      
     
 
-# Não tem tabela no Banco
-class Activity(models.Model):
+class Talk(models.Model):
     title = models.CharField('título', max_length=100)
     start = models.TimeField('início', blank=True, null=True)
     description = models.TextField('descrição', blank=True)
@@ -58,8 +57,6 @@ class Activity(models.Model):
     
     objects = PeriodManager()
     class Meta:
-        #abstract é a chave para mostrar para o django que isso se trata de uma classe abstrata. Esse abstract faz com que não tenha uma tabela associada no BD.
-        abstract = True 
         ordering = ['start']
         verbose_name_plural = 'palestras'
         verbose_name = 'palestra'
@@ -67,12 +64,11 @@ class Activity(models.Model):
     def __str__(self):
         return self.title      
     
-class Talk(Activity):
-    pass
-
 
 class Course(Talk):
     slots = models.IntegerField('slots')
+
+    objects = PeriodManager()
 
     class Meta:
         verbose_name_plural = 'cursos'
