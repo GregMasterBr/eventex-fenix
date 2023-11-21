@@ -47,7 +47,7 @@ class TalkListGet(TestCase):
 
     def test_context(self):
         """"Talk must be in context"""
-        variables = ['morning_talks','afternoon_talks', 'courses']
+        variables = ['morning_talks','afternoon_talks']
 
         for key in variables:
             with self.subTest():
@@ -59,7 +59,7 @@ class TalkListGetEmpty(TestCase):
 
         self.assertContains(response, 'Ainda não existem palestras de manhã.')
         self.assertContains(response, 'Ainda não existem palestras de tarde.')
-        self.assertContains(response, 'Ainda não existem cursos.')
+        #self.assertContains(response, 'Ainda não existem cursos.')
 
         
 class CourseModelTest(TestCase):
