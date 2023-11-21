@@ -1,6 +1,6 @@
 from django.test import TestCase
 from django.shortcuts import resolve_url as r
-from eventex.core.models import Speaker, Talk, CourseOld
+from eventex.core.models import Speaker, Talk, CourseOld, Course
 from eventex.core.managers import PeriodManager
 
 
