@@ -1,6 +1,6 @@
 from django.test import TestCase
 from django.shortcuts import resolve_url as r
-from eventex.core.models import Speaker, Talk, CourseOld, Course
+from eventex.core.models import Speaker, Talk, Course
 from eventex.core.managers import PeriodManager
 
 
@@ -8,7 +8,7 @@ class TalkListGet(TestCase):
     def setUp(self):
         t1 = Talk.objects.create(title='Título da Palestra', start='10:00', description='Descrição da palestra.')       
         t2 = Talk.objects.create(title='Título da Palestra', start='13:00', description='Descrição da palestra.')  
-        c1 = CourseOld.objects.create(title='Título do Curso', start='09:00', description='Descrição do curso.', slots=20)  
+        c1 = Course.objects.create(title='Título do Curso', start='09:00', description='Descrição do curso.', slots=20)  
 
 
         speaker = Speaker.objects.create( 
@@ -62,9 +62,9 @@ class TalkListGetEmpty(TestCase):
         #self.assertContains(response, 'Ainda não existem cursos.')
 
         
-class CourseOldModelTest(TestCase):
+class CourseModelTest(TestCase):
     def setUp(self) -> None:
-        self.CourseOld = CourseOld.objects.create(
+        self.Course = Course.objects.create(
             title = 'Título do Curso',
             start = '09:00',
             description = 'Descrição do curso.',
@@ -72,21 +72,21 @@ class CourseOldModelTest(TestCase):
         )
 
     def test_create(self):
-        self.assertTrue(CourseOld.objects.exists())
+        self.assertTrue(Course.objects.exists())
 
     def test_has_speakers(self):
-        """CourseOld has many Speakers and vice-versa"""
+        """Course has many Speakers and vice-versa"""
 
-        self.CourseOld.speakers.create(
+        self.Course.speakers.create(
             name= 'Henrique Bastos',
             slug = 'henrique-bastos',
             website = 'https://henriquebastos.net'
         )
 
-        self.assertEqual(1, self.CourseOld.speakers.count())
+        self.assertEqual(1, self.Course.speakers.count())
 
     def test_str(self):
-        self.assertEqual('Título do Curso', str(self.CourseOld))        
+        self.assertEqual('Título do Curso', str(self.Course))        
 
     def test_manager(self):
-        self.assertIsInstance(CourseOld.objects, PeriodManager)                
+        self.assertIsInstance(Course.objects, PeriodManager)                
