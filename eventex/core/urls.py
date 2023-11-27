@@ -1,6 +1,6 @@
 from django.urls import path
-from eventex.core import views
+from eventex.core.views import contato, HomeView
 urlpatterns = [
-    path("", views.home, name="home"),
-    path("contato", views.contato, name="contato"),
+    path("", HomeView.as_view(), name="home"),
+    path("contato", contato, name="contato"),
 ]
