@@ -3,9 +3,7 @@ from eventex.core.models import Speaker, Talk, Course
 from django.views.generic import ListView
 
 
-class HomeView(ListView):
-    template_name = 'index.html'
-    model = Speaker
+home = ListView.as_view(template_name='index.html', model=Speaker)
 
 def speaker_detail(request, slug):
     #speaker = Speaker.objects.get(slug=slug)
