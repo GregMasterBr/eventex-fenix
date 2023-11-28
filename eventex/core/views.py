@@ -1,16 +1,11 @@
 from django.shortcuts import render, get_object_or_404
 from eventex.core.models import Speaker, Talk, Course
-from django.views.generic import View, TemplateView
-from django.views.generic.list import MultipleObjectMixin
+from django.views.generic import ListView
 
-class GenericHomeView(MultipleObjectMixin, TemplateView):
-    pass
 
-class HomeView(GenericHomeView):
+class HomeView(ListView):
     template_name = 'index.html'
-    object_list = Speaker.objects.all() 
-    context_object_name = 'speaker_list'    
-
+    model = Speaker
 
 def speaker_detail(request, slug):
     #speaker = Speaker.objects.get(slug=slug)
