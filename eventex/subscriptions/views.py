@@ -7,6 +7,7 @@ from django.template.loader import render_to_string
 from django.contrib import messages
 from django.conf import settings
 from django.shortcuts import redirect, resolve_url as r
+from django.views.generic import DetailView
 
 def new(request):
    if request.method == 'POST':
@@ -34,14 +35,7 @@ def create(request):
    return HttpResponseRedirect(r('subscriptions:detail', subscription.pk))
    
 
-def detail(request, pk):
-   try:
-      subscription = Subscription.objects.get(pk=pk)
-   except Subscription.DoesNotExist:
-      raise Http404
-   
-   return render(request,'subscriptions/subscription_detail.html', {'subscription':subscription})
-
+detail = DetailView.as_view(model=Subscription)
 
 def _send_mail(subject, from_, to, template_name, context):
       body = render_to_string(template_name, context)
