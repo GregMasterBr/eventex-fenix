@@ -10,14 +10,18 @@ from django.shortcuts import redirect, resolve_url as r
 from django.views.generic import DetailView, View
 
 class SubscriptionCreate(View):
+   template_name = 'subscriptions/subscription_form.html'
+   form_class = SubscriptionForm
+
+   
    def get(self, *args, **kwargs):
-      return render(self.request,'subscriptions/subscription_form.html', {'form':SubscriptionForm()}) 
+      return self.render_to_response({'form': self.get_form()}) 
 
    def post(self, *args, **kwargs):
-      form = SubscriptionForm(self.request.POST)
+      form = self.get_form()
 
       if not form.is_valid():
-         return render(self.request,'subscriptions/subscription_form.html', {'form':form})
+         return self.render_to_response({'form':form})
 
       subscription = form.save() # quando o formulário for muito alinhado com a model.
 
@@ -26,6 +30,16 @@ class SubscriptionCreate(View):
       
       return HttpResponseRedirect(r('subscriptions:detail', subscription.pk))
    
+   def render_to_response(self, context):
+       return render(self.request, self.template_name, context) 
+   
+
+   def get_form(self):
+       if self.request.method == 'POST':
+           return self.form_class(self.request.POST)
+       return self.form_class()
+   
+      
 new = SubscriptionCreate.as_view()
 
 detail = DetailView.as_view(model=Subscription)
