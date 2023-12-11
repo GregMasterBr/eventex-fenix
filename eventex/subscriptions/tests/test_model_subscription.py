@@ -26,3 +26,9 @@ class SubscriptionModelTest(TestCase):
     def test_paid_default_to_False(self):
         """"By default paid must be False"""
         self.assertEqual(False,self.obj.paid)
+
+    def test_get_absolute_url(self):
+        url = r('subscriptions:detail', self.obj.pk)
+        self.assertEqual(url, self.obj.get_absolute_url())
+
+    
