@@ -8,10 +8,11 @@ from django.contrib import messages
 from django.conf import settings
 from django.views.generic import DetailView, View
 from django.views.generic.base import TemplateResponseMixin
+from django.views.generic.edit import FormMixin
 from django.shortcuts import resolve_url as r
 
 
-class SubscriptionCreate(TemplateResponseMixin,View):
+class SubscriptionCreate(TemplateResponseMixin,FormMixin, View):
    template_name = 'subscriptions/subscription_form.html'
    form_class = SubscriptionForm
 
@@ -30,8 +31,6 @@ class SubscriptionCreate(TemplateResponseMixin,View):
       return self.form_valid(form)   
       
 
-   def form_invalid(self, form):   
-      return self.render_to_response(self.get_context_data(form=form))
 
    def form_valid(self, form):
       self.object = form.save() # quando o formulário for muito alinhado com a model.
@@ -46,15 +45,6 @@ class SubscriptionCreate(TemplateResponseMixin,View):
        return self.object.get_absolute_url()
    
    
-   def get_form(self):
-       if self.request.method == 'POST':
-           return self.form_class(self.request.POST)
-       return self.form_class()
-   
-   def get_context_data(self, **kwargs):
-       context = dict(kwargs)
-       context.setdefault('form', self.get_form())
-       return context
       
 new = SubscriptionCreate.as_view()
 
