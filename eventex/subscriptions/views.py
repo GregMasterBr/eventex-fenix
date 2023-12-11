@@ -8,8 +8,9 @@ from django.contrib import messages
 from django.conf import settings
 from django.shortcuts import redirect, resolve_url as r
 from django.views.generic import DetailView, View
+from django.views.generic.base import TemplateResponseMixin
 
-class SubscriptionCreate(View):
+class SubscriptionCreate(TemplateResponseMixin,View):
    template_name = 'subscriptions/subscription_form.html'
    form_class = SubscriptionForm
 
@@ -29,9 +30,6 @@ class SubscriptionCreate(View):
       _send_mail('Confirmação de inscrição', settings.DEFAULT_FROM_EMAIL, subscription.email, 'subscriptions/subscription_email.txt', {'subscription':subscription})
       
       return HttpResponseRedirect(r('subscriptions:detail', subscription.pk))
-   
-   def render_to_response(self, context):
-       return render(self.request, self.template_name, context) 
    
 
    def get_form(self):
