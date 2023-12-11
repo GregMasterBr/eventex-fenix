@@ -8,28 +8,23 @@ from django.contrib import messages
 from django.conf import settings
 from django.views.generic import DetailView, View
 from django.views.generic.base import TemplateResponseMixin
-from django.views.generic.edit import ModelFormMixin
+from django.views.generic.edit import ModelFormMixin, ProcessFormView
 from django.shortcuts import resolve_url as r
 
 
-class SubscriptionCreate(TemplateResponseMixin, ModelFormMixin, View):
+class SubscriptionCreate(TemplateResponseMixin, ModelFormMixin, ProcessFormView):
    template_name = 'subscriptions/subscription_form.html'
    form_class = SubscriptionForm
 
    
    def get(self, *args, **kwargs):
       self.object = None
-      return self.render_to_response(self.get_context_data()) 
+      return super().get(*args, **kwargs)
 
 
    def post(self, *args, **kwargs):
       self.object = None
-      form = self.get_form()
-
-      if not form.is_valid():
-         return self.form_invalid(form)
-      return self.form_valid(form)   
-      
+      return super().post(*args, **kwargs)      
 
 
    def form_valid(self, form):
