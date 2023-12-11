@@ -8,11 +8,11 @@ from django.contrib import messages
 from django.conf import settings
 from django.views.generic import DetailView, View
 from django.views.generic.base import TemplateResponseMixin
-from django.views.generic.edit import FormMixin
+from django.views.generic.edit import ModelFormMixin
 from django.shortcuts import resolve_url as r
 
 
-class SubscriptionCreate(TemplateResponseMixin,FormMixin, View):
+class SubscriptionCreate(TemplateResponseMixin, ModelFormMixin, View):
    template_name = 'subscriptions/subscription_form.html'
    form_class = SubscriptionForm
 
@@ -40,12 +40,7 @@ class SubscriptionCreate(TemplateResponseMixin,FormMixin, View):
       
       return HttpResponseRedirect(self.get_success_url())
    
-
-   def get_success_url(self):
-       return self.object.get_absolute_url()
-   
-   
-      
+     
 new = SubscriptionCreate.as_view()
 
 detail = DetailView.as_view(model=Subscription)
