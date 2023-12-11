@@ -17,10 +17,12 @@ class SubscriptionCreate(TemplateResponseMixin,View):
 
    
    def get(self, *args, **kwargs):
+      self.object = None
       return self.render_to_response(self.get_context_data()) 
 
 
    def post(self, *args, **kwargs):
+      self.object = None
       form = self.get_form()
 
       if not form.is_valid():
@@ -32,16 +34,16 @@ class SubscriptionCreate(TemplateResponseMixin,View):
       return self.render_to_response(self.get_context_data(form=form))
 
    def form_valid(self, form):
-      self.subscription = form.save() # quando o formulário for muito alinhado com a model.
+      self.object = form.save() # quando o formulário for muito alinhado com a model.
 
       #envia email
-      _send_mail('Confirmação de inscrição', settings.DEFAULT_FROM_EMAIL, self.subscription.email, 'subscriptions/subscription_email.txt', {'subscription':self.subscription})
+      _send_mail('Confirmação de inscrição', settings.DEFAULT_FROM_EMAIL, self.object.email, 'subscriptions/subscription_email.txt', {'subscription':self.object})
       
       return HttpResponseRedirect(self.get_success_url())
    
 
    def get_success_url(self):
-       return self.subscription.get_absolute_url()
+       return self.object.get_absolute_url()
    
    
    def get_form(self):
