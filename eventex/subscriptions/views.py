@@ -18,12 +18,19 @@ class SubscriptionCreate(TemplateResponseMixin,View):
    def get(self, *args, **kwargs):
       return self.render_to_response(self.get_context_data()) 
 
+
    def post(self, *args, **kwargs):
       form = self.get_form()
 
       if not form.is_valid():
-         return self.render_to_response(self.get_context_data(form=form))
+         return self.form_invalid(form)
+      return self.form_valid(form)   
+      
 
+   def form_invalid(self, form):   
+      return self.render_to_response(self.get_context_data(form=form))
+
+   def form_valid(self, form):
       subscription = form.save() # quando o formulário for muito alinhado com a model.
 
       #envia email
