@@ -11,22 +11,13 @@ from django.views.generic.base import TemplateResponseMixin
 from django.views.generic import CreateView
 from django.shortcuts import resolve_url as r
 
-
-class SubscriptionCreate(CreateView):
-   model = Subscription
-   form_class = SubscriptionForm
+class EmailCreateMixin:
    email_to =  None
    email_context_name = None
    email_template_name = None
    email_from = settings.DEFAULT_FROM_EMAIL
-   email_subject = 'Confirmação de inscrição'
+   email_subject = ''
 
-   def form_valid(self, form):
-      response = super().form_valid(form)
-      self.send_mail()
-
-      return response
-   
    def send_mail(self):
       '''Send subscription email '''
       subject = self.email_subject
@@ -63,6 +54,18 @@ class SubscriptionCreate(CreateView):
          return self.email_to
       else:
          return self.object.email
+
+class SubscriptionCreate(EmailCreateMixin, CreateView):
+   model = Subscription
+   form_class = SubscriptionForm
+   email_subject = 'Confirmação de inscrição'
+
+
+   def form_valid(self, form):
+      response = super().form_valid(form)
+      self.send_mail()
+
+      return response
 
      
 new = SubscriptionCreate.as_view()
