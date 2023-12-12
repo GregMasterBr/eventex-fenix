@@ -8,32 +8,21 @@ from django.contrib import messages
 from django.conf import settings
 from django.views.generic import DetailView, View
 from django.views.generic.base import TemplateResponseMixin
-from django.views.generic.edit import ModelFormMixin, ProcessFormView
+from django.views.generic.edit import BaseCreateView
 from django.shortcuts import resolve_url as r
 
 
-class SubscriptionCreate(TemplateResponseMixin, ModelFormMixin, ProcessFormView):
+class SubscriptionCreate(TemplateResponseMixin, BaseCreateView):
    template_name = 'subscriptions/subscription_form.html'
    form_class = SubscriptionForm
 
-   
-   def get(self, *args, **kwargs):
-      self.object = None
-      return super().get(*args, **kwargs)
-
-
-   def post(self, *args, **kwargs):
-      self.object = None
-      return super().post(*args, **kwargs)      
-
-
    def form_valid(self, form):
-      self.object = form.save() # quando o formulário for muito alinhado com a model.
+      response = super().form_valid(form)
 
       #envia email
       _send_mail('Confirmação de inscrição', settings.DEFAULT_FROM_EMAIL, self.object.email, 'subscriptions/subscription_email.txt', {'subscription':self.object})
       
-      return HttpResponseRedirect(self.get_success_url())
+      return response
    
      
 new = SubscriptionCreate.as_view()
