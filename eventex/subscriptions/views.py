@@ -8,12 +8,12 @@ from django.contrib import messages
 from django.conf import settings
 from django.views.generic import DetailView, View
 from django.views.generic.base import TemplateResponseMixin
-from django.views.generic.edit import BaseCreateView
+from django.views.generic import CreateView
 from django.shortcuts import resolve_url as r
 
 
-class SubscriptionCreate(TemplateResponseMixin, BaseCreateView):
-   template_name = 'subscriptions/subscription_form.html'
+class SubscriptionCreate(CreateView):
+   model = Subscription
    form_class = SubscriptionForm
 
    def form_valid(self, form):
